@@ -39,6 +39,16 @@ public class Tests
         matchs.Last().JoueurA.Nom.Should().Be("Numéro 4");
         matchs.Last().JoueurB.Nom.Should().Be("Numéro 8");
     }
+
+    [Test]
+    public void Appairer_lors_de_la_premier_ronde_sans_joueurs_ne_renvoie_aucun_matchs()
+    {
+        var rondesSuisse = new OrganisateurRondesSuisse().Creer();
+        
+        var matchs = rondesSuisse.Appairer();
+        
+        matchs.Should().BeEmpty();
+    }
     // Les joueurs qui gagnent reçoivent un point et les perdants ne reçoivent aucun point
 }
 
@@ -73,6 +83,8 @@ public class RondesSuisse
 
     public IEnumerable<Match> Appairer()
     {
+        if (!_joueurs.Any())
+            return Enumerable.Empty<Match>();
         return new[]
         {
             new Match {JoueurA = new Joueur("Numéro 1"), JoueurB = new Joueur("Numéro 5")},
