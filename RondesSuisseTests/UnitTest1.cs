@@ -30,14 +30,16 @@ public class Tests
 
         var matchs = rondesSuisse.Appairer();
         matchs.Should().HaveCount(4);
-        matchs.First().JoueurA.Nom.Should().Be("Numéro 1");
-        matchs.First().JoueurB.Nom.Should().Be("Numéro 5");
-        matchs.ElementAt(1).JoueurA.Nom.Should().Be("Numéro 2");
-        matchs.ElementAt(1).JoueurB.Nom.Should().Be("Numéro 6");
-        matchs.ElementAt(2).JoueurA.Nom.Should().Be("Numéro 3");
-        matchs.ElementAt(2).JoueurB.Nom.Should().Be("Numéro 7");
-        matchs.Last().JoueurA.Nom.Should().Be("Numéro 4");
-        matchs.Last().JoueurB.Nom.Should().Be("Numéro 8");
+        DevraitOpposer(matchs.First(), "Numéro 1", "Numéro 5");
+        DevraitOpposer(matchs.ElementAt(1), "Numéro 2", "Numéro 6");
+        DevraitOpposer(matchs.ElementAt(2), "Numéro 3", "Numéro 7");
+        DevraitOpposer(matchs.Last(), "Numéro 4", "Numéro 8");
+    }
+
+    private static void DevraitOpposer(Match match, string nomJoueurA, string nomJoueurB)
+    {
+        match.JoueurA.Nom.Should().Be(nomJoueurA);
+        match.JoueurB.Nom.Should().Be(nomJoueurB);
     }
 
     [Test]
