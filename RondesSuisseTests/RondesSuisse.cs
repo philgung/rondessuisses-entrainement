@@ -17,18 +17,21 @@ public class RondesSuisse
         var joueurs = _joueurs.ToArray();
         if (joueurs.EstPair())
         {
-            var sousGroupeA = joueurs[..(joueurs.Length/2)];
-            var sousGroupeB = joueurs[(joueurs.Length/2)..];
+            var tailleGroupe = joueurs.Length/2;
+            var sousGroupeA = joueurs[..tailleGroupe];
+            var sousGroupeB = joueurs[tailleGroupe..];
 
-            return sousGroupeA.Select((joueurA, index) => 
-                new Match {JoueurA = joueurA, JoueurB = sousGroupeB[index]});
+            return sousGroupeB.Select((joueurB, index) => 
+                new Match {JoueurA = sousGroupeA[index], JoueurB = joueurB});
         }
         else
         {
-            var sousGroupeA = joueurs[..(joueurs.Length/2 + 1)];
-            var sousGroupeB = joueurs[(joueurs.Length/2 + 1)..];
+            var tailleGroupe = joueurs.Length/2 + 1;
+            var sousGroupeA = joueurs[..tailleGroupe];
+            var sousGroupeB = joueurs[tailleGroupe..];
             var matchs = sousGroupeB.Select((joueurB, index) => 
-                new Match {JoueurA = sousGroupeA[index], JoueurB = joueurB}).ToList();
+                new Match {JoueurA = sousGroupeA[index], JoueurB = joueurB})
+                .ToList();
             matchs.Add(new Match{ JoueurA = sousGroupeA[^1], JoueurB = Joueur.Anonyme});
             return matchs;
         }
