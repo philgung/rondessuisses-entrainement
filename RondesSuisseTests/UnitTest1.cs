@@ -4,13 +4,6 @@ namespace RondesSuisseTests;
 
 public class DurantLaPremiereRonde
 {
-    // Pour la première ronde, les joueurs sont divisés en deux sous-groupes :
-    // un sous-groupe S1 composé des joueurs 1 à n/2, et un sous-groupe
-    // S2 composé des joueurs (n/2)+1 à n.
-    // Le premier de S1 joue contre le premier de S2, le deuxième de S1
-    // contre le deuxième de S2, et ainsi de suite de manière que le dernier
-    // joueur de S1 joue contre le dernier joueur de S2
-    
     // S'il y a 8 joueurs dans un groupe de même score, le numéro 1 affronte
     // le numéro 5, le numéro 2 affronte le numéro 6 et ainsi de suite
     
@@ -106,29 +99,6 @@ public class OrganisateurRondesSuisse
 public record Joueur(string Nom)
 {
     public static Joueur Anonyme = new("Anonyme");
-}
-
-public class RondesSuisse
-{
-    private readonly IEnumerable<Joueur> _joueurs;
-
-    public RondesSuisse(IEnumerable<Joueur> joueurs)
-    {
-        _joueurs = joueurs;
-    }
-
-    public IEnumerable<Match> Appairer()
-    {
-        if (!_joueurs.Any())
-            return Enumerable.Empty<Match>();
-        return new[]
-        {
-            new Match {JoueurA = new Joueur("Numéro 1"), JoueurB = new Joueur("Numéro 5")},
-            new Match {JoueurA = new Joueur("Numéro 2"), JoueurB = new Joueur("Numéro 6")},
-            new Match {JoueurA = new Joueur("Numéro 3"), JoueurB = new Joueur("Numéro 7")},
-            new Match {JoueurA = new Joueur("Numéro 4"), JoueurB = new Joueur("Numéro 8")},
-        };
-    }
 }
 
 public class Match
