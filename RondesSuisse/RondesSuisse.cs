@@ -1,4 +1,4 @@
-namespace RondesSuisseTests;
+namespace RondesSuisse;
 
 public class RondesSuisse
 {
@@ -30,15 +30,10 @@ public class RondesSuisse
             var sousGroupeA = joueurs[..tailleGroupe];
             var sousGroupeB = joueurs[tailleGroupe..];
             var matchs = sousGroupeB.Select((joueurB, index) => 
-                new Match {JoueurA = sousGroupeA[index], JoueurB = joueurB})
+                    new Match {JoueurA = sousGroupeA[index], JoueurB = joueurB})
                 .ToList();
             matchs.Add(new Match{ JoueurA = sousGroupeA[^1], JoueurB = Joueur.Anonyme});
             return matchs;
         }
     }
-}
-
-public static class EnumerableExtensions
-{
-    public static bool EstPair<T>(this IEnumerable<T> collection) => collection.Count() % 2 == 0;
 }

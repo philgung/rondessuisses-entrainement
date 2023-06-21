@@ -1,4 +1,5 @@
 using FluentAssertions;
+using RondesSuisse;
 
 namespace RondesSuisseTests;
 
@@ -61,14 +62,14 @@ public class DurantLaPremiereRonde
         matchs.Should().BeEmpty();
     }
 
-    private static Joueur _numéro1 = new("Numéro 1");
-    private static Joueur _numéro2 = new("Numéro 2");
-    private static Joueur _numéro3 = new("Numéro 3");
-    private static Joueur _numéro4 = new("Numéro 4");
-    private static Joueur _numéro5 = new("Numéro 5");
-    private static Joueur _numéro6 = new("Numéro 6");
-    private static Joueur _numéro7 = new("Numéro 7");
-    private static Joueur _numéro8 = new("Numéro 8");
+    private static Joueur _numéro1 = new((string) "Numéro 1");
+    private static Joueur _numéro2 = new((string) "Numéro 2");
+    private static Joueur _numéro3 = new((string) "Numéro 3");
+    private static Joueur _numéro4 = new((string) "Numéro 4");
+    private static Joueur _numéro5 = new((string) "Numéro 5");
+    private static Joueur _numéro6 = new((string) "Numéro 6");
+    private static Joueur _numéro7 = new((string) "Numéro 7");
+    private static Joueur _numéro8 = new((string) "Numéro 8");
     // Les joueurs qui gagnent reçoivent un point et les perdants ne reçoivent aucun point
 }
 
@@ -79,30 +80,4 @@ public static class TestExtensions
         match.JoueurA.Should().Be(joueurA);
         match.JoueurB.Should().Be(joueurB);
     }    
-}
-public class OrganisateurRondesSuisse
-{
-    private readonly IList<Joueur> _joueurs = new List<Joueur>();
-
-    public OrganisateurRondesSuisse AjouterJoueur(Joueur joueur)
-    {
-        _joueurs.Add(joueur);
-        return this;
-    }
-
-    public RondesSuisse Creer()
-    {
-        return new RondesSuisse(_joueurs);
-    }
-}
-
-public record Joueur(string Nom)
-{
-    public static Joueur Anonyme = new("Anonyme");
-}
-
-public class Match
-{
-    public Joueur JoueurA { get; set; }
-    public Joueur JoueurB { get; set; }
 }

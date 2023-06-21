@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Specs", "Specs", "{DFC188B1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RondesSuisseTests", "RondesSuisseTests\RondesSuisseTests.csproj", "{3444CD7C-11AC-41C5-8E0E-FA4BCDD9166D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RondesSuisse", "RondesSuisse\RondesSuisse.csproj", "{18CFE1A8-46F3-4AB5-9E97-D901BC7FCC03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,5 +25,9 @@ Global
 		{3444CD7C-11AC-41C5-8E0E-FA4BCDD9166D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3444CD7C-11AC-41C5-8E0E-FA4BCDD9166D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3444CD7C-11AC-41C5-8E0E-FA4BCDD9166D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18CFE1A8-46F3-4AB5-9E97-D901BC7FCC03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18CFE1A8-46F3-4AB5-9E97-D901BC7FCC03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18CFE1A8-46F3-4AB5-9E97-D901BC7FCC03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18CFE1A8-46F3-4AB5-9E97-D901BC7FCC03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
