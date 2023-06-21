@@ -2,7 +2,7 @@ using FluentAssertions;
 
 namespace RondesSuisseTests;
 
-public class Tests
+public class DurantLaPremiereRonde
 {
     // Pour la première ronde, les joueurs sont divisés en deux sous-groupes :
     // un sous-groupe S1 composé des joueurs 1 à n/2, et un sous-groupe
@@ -15,35 +15,51 @@ public class Tests
     // le numéro 5, le numéro 2 affronte le numéro 6 et ainsi de suite
     
     [Test]
-    public void Devrait_appairer_lors_de_la_premiere_ronde_pour_8_joueurs()
+    public void Appairer_pour_8_joueurs_devrait_retourner_4_matchs()
     {
         var rondesSuisse = new OrganisateurRondesSuisse()
-            .AjouterJoueur("Numéro 1")
-            .AjouterJoueur("Numéro 2")
-            .AjouterJoueur("Numéro 3")
-            .AjouterJoueur("Numéro 4")
-            .AjouterJoueur("Numéro 5")
-            .AjouterJoueur("Numéro 6")
-            .AjouterJoueur("Numéro 7")
-            .AjouterJoueur("Numéro 8")
+            .AjouterJoueur(_numéro1)
+            .AjouterJoueur(_numéro2)
+            .AjouterJoueur(_numéro3)
+            .AjouterJoueur(_numéro4)
+            .AjouterJoueur(_numéro5)
+            .AjouterJoueur(_numéro6)
+            .AjouterJoueur(_numéro7)
+            .AjouterJoueur(_numéro8)
             .Creer();
 
         var matchs = rondesSuisse.Appairer();
         matchs.Should().HaveCount(4);
-        DevraitOpposer(matchs.First(), "Numéro 1", "Numéro 5");
-        DevraitOpposer(matchs.ElementAt(1), "Numéro 2", "Numéro 6");
-        DevraitOpposer(matchs.ElementAt(2), "Numéro 3", "Numéro 7");
-        DevraitOpposer(matchs.Last(), "Numéro 4", "Numéro 8");
-    }
-
-    private static void DevraitOpposer(Match match, string nomJoueurA, string nomJoueurB)
-    {
-        match.JoueurA.Nom.Should().Be(nomJoueurA);
-        match.JoueurB.Nom.Should().Be(nomJoueurB);
+        matchs.First().DevraitOpposer(_numéro1, _numéro5);
+        matchs.ElementAt(1).DevraitOpposer(_numéro2, _numéro6);
+        matchs.ElementAt(2).DevraitOpposer(_numéro3, _numéro7);
+        matchs.Last().DevraitOpposer(_numéro4, _numéro8);
     }
 
     [Test]
-    public void Appairer_lors_de_la_premier_ronde_sans_joueurs_ne_renvoie_aucun_matchs()
+    public void Appairer_pour_7_joueurs_devrait_retourner_4_matchs_dont_un_exempte()
+    {
+        var rondesSuisse = new OrganisateurRondesSuisse()
+            .AjouterJoueur(_numéro1)
+            .AjouterJoueur(_numéro2)
+            .AjouterJoueur(_numéro3)
+            .AjouterJoueur(_numéro4)
+            .AjouterJoueur(_numéro5)
+            .AjouterJoueur(_numéro6)
+            .AjouterJoueur(_numéro7)
+            .Creer();
+
+        var matchs = rondesSuisse.Appairer();
+
+        matchs.Should().HaveCount(4);
+        matchs.First().DevraitOpposer(_numéro1, _numéro5);
+        matchs.ElementAt(1).DevraitOpposer(_numéro2, _numéro6);
+        matchs.ElementAt(2).DevraitOpposer(_numéro3, _numéro7);
+        matchs.Last().DevraitOpposer(_numéro4, Joueur.Anonyme);
+    }
+
+    [Test]
+    public void Appairer_sans_joueurs_ne_renvoie_aucun_matchs()
     {
         var rondesSuisse = new OrganisateurRondesSuisse().Creer();
         
@@ -51,16 +67,33 @@ public class Tests
         
         matchs.Should().BeEmpty();
     }
+
+    private static Joueur _numéro1 = new("Numéro 1");
+    private static Joueur _numéro2 = new("Numéro 2");
+    private static Joueur _numéro3 = new("Numéro 3");
+    private static Joueur _numéro4 = new("Numéro 4");
+    private static Joueur _numéro5 = new("Numéro 5");
+    private static Joueur _numéro6 = new("Numéro 6");
+    private static Joueur _numéro7 = new("Numéro 7");
+    private static Joueur _numéro8 = new("Numéro 8");
     // Les joueurs qui gagnent reçoivent un point et les perdants ne reçoivent aucun point
 }
 
+public static class TestExtensions
+{
+    public static void DevraitOpposer(this Match match, Joueur joueurA, Joueur joueurB)
+    {
+        match.JoueurA.Should().Be(joueurA);
+        match.JoueurB.Should().Be(joueurB);
+    }    
+}
 public class OrganisateurRondesSuisse
 {
     private readonly IList<Joueur> _joueurs = new List<Joueur>();
 
-    public OrganisateurRondesSuisse AjouterJoueur(string nom)
+    public OrganisateurRondesSuisse AjouterJoueur(Joueur joueur)
     {
-        _joueurs.Add(new Joueur(nom));
+        _joueurs.Add(joueur);
         return this;
     }
 
@@ -72,6 +105,7 @@ public class OrganisateurRondesSuisse
 
 public record Joueur(string Nom)
 {
+    public static Joueur Anonyme = new("Anonyme");
 }
 
 public class RondesSuisse
