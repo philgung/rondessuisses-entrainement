@@ -1,5 +1,75 @@
 ﻿@page "/"
+@using RondesSuisse
 
 <PageTitle>Rondes Suisse</PageTitle>
 
 <h1>Rondes Suisse</h1>
+<EditForm Model="@joueurAAjouter" OnSubmit="@JoueurAAjouter">
+    <InputText @bind-Value="joueurAAjouter.Nom" />
+
+    <button type="submit">Ajouter</button>
+</EditForm>
+@if (_joueurs != null && _joueurs.Any())
+{
+    <p>Joueurs : </p>
+    foreach (var joueur in _joueurs)
+    {
+        <p>@joueur.Nom</p>
+    }
+}
+<button @onclick="CreerRondesSuisse">Créer rondes suisse</button>
+<p>@messageRondeSuisseCree</p>
+<br/>
+<button @onclick="Appairer">Appairer</button>
+@if (LesMatchs != null && LesMatchs.Any())
+{
+    <p>Ronde 1 : </p>
+    foreach (var match in LesMatchs)
+    {
+        <p>Match : @match.JoueurA.Nom - @match.JoueurB.Nom</p>
+    }
+}
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        RondesSuisse = new OrganisateurRondesSuisse().Creer();
+    }
+
+    private void Appairer()
+    {
+        LesMatchs = RondesSuisse.Appairer();
+    }
+
+
+    private RondesSuisse RondesSuisse;
+    private IEnumerable<Match> LesMatchs;
+    private JoueurView joueurAAjouter = new();
+    private IList<Joueur> _joueurs= new List<Joueur>();
+
+    private void CreerRondesSuisse()
+    {
+        var organisateur = new OrganisateurRondesSuisse();
+
+        foreach (var joueur in _joueurs)
+        {
+            organisateur.AjouterJoueur(joueur);
+        }
+        
+        RondesSuisse = organisateur.Creer();
+        messageRondeSuisseCree = "Ronde Suisse Créé !";
+    }
+
+    private string messageRondeSuisseCree;
+    private void JoueurAAjouter()
+    {
+        _joueurs.Add(new Joueur(joueurAAjouter.Nom));
+        joueurAAjouter = new JoueurView();
+    }
+
+    class JoueurView
+    {
+        public string Nom { get; set; }
+    }
+}
