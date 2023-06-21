@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RondesSuisseTests", "Rondes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RondesSuisse", "RondesSuisse\RondesSuisse.csproj", "{18CFE1A8-46F3-4AB5-9E97-D901BC7FCC03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RondesSuisse_Web", "RondesSuisse_Web\RondesSuisse_Web.csproj", "{C1A3F241-FF34-45F0-9891-75ECFDCE636C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,5 +31,9 @@ Global
 		{18CFE1A8-46F3-4AB5-9E97-D901BC7FCC03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18CFE1A8-46F3-4AB5-9E97-D901BC7FCC03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18CFE1A8-46F3-4AB5-9E97-D901BC7FCC03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1A3F241-FF34-45F0-9891-75ECFDCE636C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1A3F241-FF34-45F0-9891-75ECFDCE636C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1A3F241-FF34-45F0-9891-75ECFDCE636C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1A3F241-FF34-45F0-9891-75ECFDCE636C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
